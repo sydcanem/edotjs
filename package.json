@@ -1,0 +1,23 @@
+{
+  "name": "express-dot-templating",
+  "version": "0.1.0",
+  "description": "Using dot templates with express 3.x",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sydcanem/express-dot-templating.git"
+  },
+  "keywords": [
+    "templating",
+    "dot.js"
+  ],
+  "author": "sydcanem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sydcanem/express-dot-templating/issues"
+  },
+  "homepage": "https://github.com/sydcanem/express-dot-templating"
+}
