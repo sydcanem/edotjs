@@ -29,7 +29,7 @@ function load( file, options ) {
 function merge( a, b ) {
   if ( a && b ) {
     for ( var key in b ) {
-      a[ key]  = b[ key ];
+      a[ key ] = b[ key ];
     }
   }
   return a;
