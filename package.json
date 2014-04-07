@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/sydcanem/express-dot-templating/issues"
   },
-  "homepage": "https://github.com/sydcanem/express-dot-templating"
+  "homepage": "https://github.com/sydcanem/express-dot-templating",
+  "dependencies": {
+    "dot": "^1.0.2"
+  },
+  "devDependencies": {
+    "should": "^3.3.0"
+  }
 }

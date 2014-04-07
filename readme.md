@@ -1,9 +1,9 @@
 ### Configure
 
-    var utils = require( './utils' );
+    var edotjs = require( 'edotjs' );
 
-   	app.set( 'view engine', '.html' );
-	app.engine( 'html', utils.renderFile );
+    app.set( 'view engine', '.html' );
+    app.engine( 'html', edotjs.renderFile );
 
 
 ### Supports
