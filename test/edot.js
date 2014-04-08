@@ -26,8 +26,32 @@ describe( 'Features', function () {
 		// Set compile-time evaluation
 		edot.defines = def;
 
-		edot.renderFile( 'test/fixtures/template.html', data, function( err, str ) {
+		edot.renderFile( 'test/fixtures/partials.html', data, function( err, str ) {
 			str.should.equal( '<div>Jake</div><div>Jake who?</div>' );
+		} );
+	} );
+
+	it( 'conditionals', function () {
+		var data = { 'name' : 'Jake', 'age' : 31 };
+
+		edot.renderFile( 'test/fixtures/conditionals.html', data, function( err, str ) {
+			str.should.equal( '<div>Oh, I love your name, Jake!</div>' );
+		} );
+	} );
+
+	it( 'arrays', function () {
+		var data = { 'array' : [ 'banana', 'apple', 'orange' ] };
+
+		edot.renderFile( 'test/fixtures/arrays.html', data, function( err, str ) {
+			str.should.equal( '<div>banana!</div><div>apple!</div><div>orange!</div>' );
+		} );
+	} );
+
+	it( 'encodes', function () {
+		var data = { 'uri' : 'http://bebedo.com/?keywords=Yoga' };
+
+		edot.renderFile( 'test/fixtures/encode.html', data, function( err, str ) {
+			str.should.equal( 'Visit http:&#47;&#47;bebedo.com&#47;?keywords=Yoga' );
 		} );
 	} );
 } );

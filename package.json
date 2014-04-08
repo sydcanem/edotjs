@@ -1,5 +1,5 @@
 {
-  "name": "express-dot-templating",
+  "name": "edotjs",
   "version": "0.1.0",
   "description": "Using dot templates with express 3.x",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sydcanem/express-dot-templating.git"
+    "url": "git://github.com/sydcanem/edotjs.git"
   },
   "keywords": [
     "templating",
@@ -17,9 +17,9 @@
   "author": "sydcanem",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sydcanem/express-dot-templating/issues"
+    "url": "https://github.com/sydcanem/edotjs/issues"
   },
-  "homepage": "https://github.com/sydcanem/express-dot-templating",
+  "homepage": "https://github.com/sydcanem/edotjs",
   "dependencies": {
     "dot": "^1.0.2"
   },

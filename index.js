@@ -50,3 +50,4 @@ function renderFile( path, options, fn ) {
 
 module.exports = dot;
 module.exports.renderFile = renderFile;
+module.exports.cache = cache;
