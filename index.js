@@ -37,7 +37,7 @@ function merge( a, b ) {
 
 function renderFile( path, options, fn ) {
 	var pagefn;
-	var def = merge( options.def || {}, { '_load' : load } );
+	var def = merge( dot.defines || {}, { '_load' : load } );
 
 	try {
 		pagefn = dot.template( load( path, options ), undefined, def );
@@ -45,8 +45,8 @@ function renderFile( path, options, fn ) {
 		fn( error );
 	}
 
-	fn( null, pagefn( options.data || {} ) );
+	fn( null, pagefn( options ) );
 }
 
-exports.dot = dot;
-exports.renderFile = renderFile;
+module.exports = dot;
+module.exports.renderFile = renderFile;

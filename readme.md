@@ -1,10 +1,17 @@
 ### Configure
 
-    var edotjs = require( 'edotjs' );
+	var edotjs = require( 'edotjs' );
 
-    app.set( 'view engine', '.html' );
+	// Configure express to render
+	// .html views using dot.js
+    app.set( 'view engine', 'html' );
     app.engine( 'html', edotjs.renderFile );
 
+    app.get( '/', function ( req, res ) {
+
+    	edotjs.defines = {}; // dot.js defines
+        res.render( 'index', some data );	
+    } );
 
 ### Supports
 - All features of dot.js
