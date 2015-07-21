@@ -1,53 +1,68 @@
 'use strict';
 
-var fs = require( 'fs' );
+var fs   = require( 'fs' );
 var path = require( 'path' );
-var dot = require( 'dot' );
+var dot  = require( 'dot' );
 
-// view cache
-var cache = {};
-var read = fs.readFileSync;
+var cache = {}; // view cache
+var read  = fs.readFileSync;
+var prod  = (process.env.NODE_ENV === 'production');
 
-function load( file, options ) {
-	var opts = options || {};
-	var view;
+function include (cwd, options) {
+  return function (file) {
+    file = path.resolve(cwd, file);
 
-	file = path.resolve( file );
-	if ( cache[ file ] ) {
-		return cache[ file ];
-	}
+    var def = merge(dot.defines || {}, {'include' : include(path.dirname(file), options)});
+    var pagefn;
+    try {
+      pagefn = dot.template(load(file, options), undefined, def);
+    } catch (error) {
+      throw error;
+    }
 
-	view = read( file, 'utf8' );
+    return pagefn(options);
+  }
+}
+function load (file, options) {
+  var opts = options || {};
+  var view;
 
-	if ( opts.cache ) {
-		cache[ file ] = view;
-	}
+  file = path.resolve(file);
+  if (cache[file]) {
+    return cache[file];
+  }
 
-	return view;
+  view = read(file, 'utf8');
+
+  if (opts.cache || (!opts.cacheOff && prod)) {
+    cache[file] = view;
+  }
+
+  return view;
 }
 
-function merge( a, b ) {
-  if ( a && b ) {
-    for ( var key in b ) {
-      a[ key ] = b[ key ];
+function merge (a, b) {
+  if (a && b) {
+    for (var key in b) {
+      a[key] = b[key];
     }
   }
   return a;
 }
 
-function renderFile( path, options, fn ) {
-	var pagefn;
-	var def = merge( dot.defines || {}, { '_load' : load } );
+function renderFile (file, options, fn) {
+  var pagefn;
+  var def = merge(dot.defines || {}, {'include' : include(path.dirname(file), options)});
 
-	try {
-		pagefn = dot.template( load( path, options ), undefined, def );
-	} catch ( error ) {
-		fn( error );
-	}
+  try {
+    pagefn = dot.template(load(file, options), undefined, def);
+  } catch (error) {
+    fn(error);
+  }
 
-	fn( null, pagefn( options ) );
+  fn(null, pagefn(options));
 }
 
-module.exports = dot;
+module.exports            = dot;
 module.exports.renderFile = renderFile;
-module.exports.cache = cache;
+module.exports.cache      = cache;

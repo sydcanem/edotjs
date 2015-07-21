@@ -1,7 +1,7 @@
 {
   "name": "edotjs",
-  "version": "0.1.0",
-  "description": "Using dot templates with express 3.x",
+  "version": "0.3.0",
+  "description": "Using dot templates with express 3.x and 4.x",
   "main": "index.js",
   "scripts": {
     "test": "mocha test"
@@ -12,7 +12,8 @@
   },
   "keywords": [
     "templating",
-    "dot.js"
+    "dot.js",
+    "dotjs"
   ],
   "author": "sydcanem",
   "license": "MIT",
