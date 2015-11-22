@@ -1,8 +1,8 @@
 'use strict';
 
-var fs   = require( 'fs' );
-var path = require( 'path' );
-var dot  = require( 'dot' );
+var fs   = require('fs');
+var path = require('path');
+var dot  = require('dot');
 
 var cache = {}; // view cache
 var read  = fs.readFileSync;
@@ -14,6 +14,7 @@ function include (cwd, options) {
 
     var def = merge(dot.defines || {}, {'include' : include(path.dirname(file), options)});
     var pagefn;
+    
     try {
       pagefn = dot.template(load(file, options), undefined, def);
     } catch (error) {
@@ -23,6 +24,7 @@ function include (cwd, options) {
     return pagefn(options);
   }
 }
+
 function load (file, options) {
   var opts = options || {};
   var view;
@@ -51,13 +53,13 @@ function merge (a, b) {
 }
 
 function renderFile (file, options, fn) {
-  var pagefn;
   var def = merge(dot.defines || {}, {'include' : include(path.dirname(file), options)});
+  var pagefn;
 
   try {
     pagefn = dot.template(load(file, options), undefined, def);
   } catch (error) {
-    fn(error);
+    return fn(error);
   }
 
   fn(null, pagefn(options));
