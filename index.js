@@ -12,13 +12,25 @@ function include (cwd, options) {
   return function (file) {
     file = path.resolve(cwd, file);
 
-    var def = merge(dot.defines || {}, {'include' : include(path.dirname(file), options)});
+    var defines = dot.defines || {};
+    var parentInclude;
+
+    // Preserve parent include
+    if (defines.include) {
+      parentInclude = defines.include;
+    }
+
+    var def = merge(defines, {'include' : include(path.dirname(file), options)});
     var pagefn;
     
     try {
       pagefn = dot.template(load(file, options), undefined, def);
     } catch (error) {
       throw error;
+    }
+
+    if (parentInclude) {
+      dot.defines.include = parentInclude;
     }
 
     return pagefn(options);
